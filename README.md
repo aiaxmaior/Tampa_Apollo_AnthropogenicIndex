@@ -123,21 +123,37 @@ In a healthy ecosystem, SDI is expected to have a close relationship with Specie
 
 ## References
 
-Aarnio, K., Mattila, J., Törnroos, A., Bonsdorff, E., 2011. Zoobenthos as an environmental quality element: the ecological significance of sampling design and functional traits. 
-Airoldi, L., Beck, M.W., 2007. Loss, status and trends for coastal marine habitats of Europe. 
-Allan, J.D. 2004. Landscapes and riverscapes: The influence of land use on stream ecosystems. Allen, D., S. Haertel-Borer, B. Milan, D. Bushek, and R. Dame. 2007. Geomorphological determinants of nekton use of intertidal salt marsh creeks. 
-Allaire, J. J., Gandrud, C., Russell, K., and Yetman, C. (2017). networkD3: D3 JavaScript network graphs from R. Available at: https://CRAN.R-project.org/package-networkD3. 
-Anderson, M.J., Walsh, D.C.I., 2013. PERMANOVA, ANOSIM, and the Mantel test in the face of heterogeneous dispersions: what null hypothesis are you testing? 
-Andersen, K.H., Berge, T., Gonçalves, R.J., Hartvig, M., Heuschele, J., Hylander, S., Jacobsen, N.S., Lindemann, C., Martens, E.A., Neuheimer, A.B., Olsson, K., Palacz, A., Prowe, A.E.F., Sainmont, J., Traving, S.J., Visser, A.W., Wadhwa, N., Kiørboe, T., 2016. Characteristic sizes of life in the oceans, from bacteria to whales. 
-Appelberg, M., Berger, H.-M., Hesthagen, T., Kleiven, E., Kurkilahti, M., Raitaniemi, J., Rask, M., 1995. Development and intercalibration of methods in nordic freshwater fish monitoring. 
-Arnold Jr., C.L., and C.J. Gibbons. 1996. Impervious surface coverage: The emergence of a key environmental indicator. 
-Ash, T., and Runnels, R. (2005). Hard bottom habitats: an overview of mapping and monitoring needs on epibenthic communities in Tampa Bay, Florida. 
-Ávila-García, D., Morató, J., Pérez-Maussán, A. I., Santillán-Carvantes, P., and Alvarado, J. (2020). Impacts of alternative land-use policies on water ecosystem services in the Rio Grande de Comitan-Lagos de Montebello watershed. 
-Bauer, R.K., 2018. Oceanmap: A Plotting Toolbox for 2D Oceanographic Data. 
-Beauchard, O., Veríssimo, H., Queirós, A.M., Herman, P.M.J., 2017. The use of multiple biological traits in marine community ecology and its potential in ecological indicator development.
-Beck, M. W., Raulerson, G. E., and Sherwood, E. T. (2022). Tbep-tech/hmpu-workflow: v1.2.0. Zenodo.
-Beck, M.W., K.L. Heck Jr., K.W. Able, D.L. Childers, D.B. Eggleston, B.M. Gillanders, B.
-Halpern, C.G. Hays, L. Hoshino, T.
-
-
+## Authors
+-   Aarnio, K., Mattila, J., Törnroos, A., Bonsdorff, E., 2011. Zoobenthos as an environmental quality element: the ecological significance of sampling design and functional traits.\
+- Airoldi, L., Beck, M.W., 2007. Loss, status and trends for coastal marine habitats of Europe.\
+- Allan, J.D. 2004. Landscapes and riverscapes: The influence of land use on stream ecosystems. Allen, D., S. Haertel-Borer, B. Milan,
+- Bushek, and R. Dame. 2007. Geomorphological determinants of nekton use of intertidal salt marsh creeks.\
+- Allaire, J. J., Gandrud, C., Russell, K., and Yetman, C. (2017). networkD3: D3 JavaScript network graphs from R. Available at: https://CRAN.R-project.org/package-networkD3. \
+- Anderson, M.J., Walsh, D.C.I., 2013. PERMANOVA, ANOSIM, and the Mantel test in the face of heterogeneous dispersions: what null hypothesis are you testing? \
+- Andersen, K.H., Berge, T., Gonçalves, R.J., Hartvig, M., Heuschele, J., Hylander, S., Jacobsen, N.S., Lindemann, C., Martens, E.A., Neuheimer, - A.B., Olsson, K., Palacz, A., Prowe, A.E.F., Sainmont, J., Traving, S.J., Visser, A.W., Wadhwa, N., Kiørboe, T., 2016. Characteristic sizes of life in the oceans, from bacteria to whales. \
+- Appelberg, M., Berger, H.-M., Hesthagen, T., Kleiven, E., Kurkilahti, M., Raitaniemi, J., Rask, M., 1995. Development and intercalibration of methods in nordic freshwater fish monitoring. \
+- Arnold Jr., C.L., and C.J. Gibbons. 1996. Impervious surface coverage: The emergence of a key environmental indicator. \
+- Ash, T., and Runnels, R. (2005). Hard bottom habitats: an overview of mapping and monitoring needs on epibenthic communities in Tampa Bay, Florida. \
+- Ávila-García, D., Morató, J., Pérez-Maussán, A. I., Santillán-Carvantes, P., and Alvarado, J. (2020). Impacts of alternative land-use policies on water ecosystem services in the Rio Grande de Comitan-Lagos de Montebello watershed. \
+- Bauer, R.K., 2018. Oceanmap: A Plotting Toolbox for 2D Oceanographic Data. \
+- Beauchard, O., Veríssimo, H., Queirós, A.M., Herman, P.M.J., 2017. The use of multiple biological traits in marine community ecology and its potential in ecological indicator development.\
+- Beck, M. W., Raulerson, G. E., and Sherwood, E. T. (2022). Tbep-tech/hmpu-workflow: v1.2.0. Zenodo.\
+- Beck, M.W., K.L. Heck Jr., K.W. Able, D.L. Childers, D.B. Eggleston, B.M. Gillanders, B. Halpern, C.G. Hays, L. Hoshino, T.J. Minello, R.J. Orth, P.F. Sheridan, and M.P. Weinstein. 2001. The identification, conservation, and management ment of estuarine and marine nurseries for fish and invertebrates.    
+- Beauchard, O., Veríssimo, H., Queirós, A.M., Herman, P.M.J., 2017. The use of multiple biological traits in marine community ecology and its potential in ecological indicator development.    
+- Beck, M. W., Raulerson, G. E., and Sherwood, E. T. (2022). Tbep-tech/hmpu-workflow: v1.2.0. Zenodo. \
+- Beck, M.W., K.L. Heck Jr., K.W. Able, D.L. Childers, D.B. Eggleston, B.M. Gillanders, B. Halpern, C.G. Hays, L. Hoshino, T.J. Minello, R.J. - Orth, P.F. Sheridan, and M.P. Weinstein. 2001. The identification, conservation, and management ment of estuarine and marine nurseries for fish and invertebrates.    \
+- Beck, M.W. 2020. tbep-tech/nekton-dash: v1.0 (Version v1.0). Zenodo\
+- Beck, M.W., Schrandt, M.N., Wessel, M., Sherwood, E.T., Best, B.D. 2020. tbeptools: Data and Indicators for the Tampa Bay Estuary Program. R package version 0.0.1\
+- Benson, C. E., Carberry, B., and Langen, T. A. (2018). Public-private partnership wetland restoration programs benefit species of greatest conservation need and other wetland-associated wildlife.   \
+- Bergström, L., Karlsson, M., Bergström, U., Pihl, L., Kraufvelin, P., 2016. Distribution of mesopredatory fish determined by habitat variables in a predator-depleted coastal system.    \
+- Bertness, M. D. (1985). Fiddler crab regulation of Spartina alterniflora production on a New England salt marsh. Ecology 66, 1042-1055.\
+- Beukhof, E., Dencker, T., Pecuchet, L., Lindegren, M., 2019. Spatio-temporal variation in marine fish traits reveals community-wide responses to environmental change.\
+- Bilby, R.E., and L.A. Mollot. 2008. Effect of changing land use patterns on the distribution of coho salmon (Oncorhynchus kisutch) in the Puget Sound region.\
+- Bilkovic, D.M., Hershner, C.H., Berman, M.R., Havens, K.J., Stanhope, D.M., 2005. Evaluating nearshore communities as indicators of ecosystem health.\
+- Bilkovic, D.M., and M.M. Roggero. 2008. Effects of coastal development on nearshore estuarine nekton communities.\
+- Bivand, R., Keitt, T., Rowlingson, B., 2017. Rgdal: Bindings for the "Geospatial" Data Abstraction Library.    
+- Bolam, S.G., Garcia, C., Eggleton, J., Kenny, A.J., Buhl-Mortensen, L., Gonzalez-Mirelis, G., van Kooten, T., Dinesen, G., Hansen, J., Hiddink, J.G., Sciberras, M., Smith, C., Papadopoulou, N., Gumus, A., Van Hoey, G., Eigaard, O.R., Bastardie, F., Rijnsdorp, A.D., 2017. - Differences in biological traits composition of benthic assemblagesbetween unimpacted habitats.\
+- Boström, C., Bonsdorff, E., 1997. Community structure and spatial variation of benthic invertebrates associated with Zostera marina (L.) beds in the northern Baltic Sea. \   
+- Boström, C., Törnroos, A., Bonsdorff, E., 2010. Invertebrate dispersal and habitat heterogeneity: expression of biological traits in a seagrass landscape. \   
+- Borja, A., Bricker, S.B., Dauer, D.M., Demetriades, N.T., Ferreira, J.G., Forbes, A.Τ., Hutchings, P., Jia, X., Kenchington, R., Marques, J.C, Zhu, C., 2008. Overview of integrative tools and methods in assessing ecological integrity in estuarine and coastal systems worldwide. \o   
 
