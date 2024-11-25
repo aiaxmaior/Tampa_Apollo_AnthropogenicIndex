@@ -1,0 +1,79 @@
+AreaID,AreaName,AreaAbbr
+13,Alafia River,AR
+14,Big Bend,BB
+15,Hillsborough River,HR
+16,Little Manatee River,LMR
+17,Palm River,PR
+18,Old Tampa Bay,OTB
+19,Hillsborough Bay & Middle Tampa Bay,NULL
+20,Middle & Lower Tampa Bay,NULL
+21,Other,NULL
+24,McKay Bay,MCB
+25,Boca Ciega Bay,BCB
+26,Bayboro Harbor,BH
+27,Bayside Bridge,BSB
+28,Cargill,CG
+29,Dredge Hole-no waterbody,DH
+30,East Bay,EB
+31,Garrison Channel,GC
+32,Hillsborough Bay,HB
+33,Cross Bayou,CRB
+34,Long Bayou,LB
+35,Lower Hillsborough River,LHR
+36,Lower Tampa Bay,LTB
+37,Manatee River,MR
+38,Middle Tampa Bay,MTB
+39,Riviera Bay Deep,RBD
+40,Riviera Bay Shallow,RBS
+41,South Big Bend,SBB
+42,Terra Ceia Bay,TCB
+43,Ybor Channel,YBC
+44,Old Tampa Bay Tributary,OTB-T
+45,Lake Thonotosassa Tributary,LT-T
+46,Alafia River Tributary,AR-T
+47,Hillsborough Bay Tributary,HB-T
+48,Lake Thonotosassa,LT
+49,Little Manatee River Tributary,LMR-T
+50,Cockroach Bay Tributary,CB-T
+54,McKay Bay Tributary,MCB-T
+55,Cockroach Bay,CB
+56,Hillsborough River Tributary,HR-T
+58,Middle Tampa Bay Tributary,MTB-T
+59,Tampa Bypass Canal,TBC
+60,Tampa Bypass Canal Tributary,TBC-T
+61,Palm River Tributary,PR-T
+62,Lower Sweetwater Creek,LSC
+63,BullFrog Creek,BFC
+64,Clam Bayou,CLB
+65,Safety Harbor,SH
+66,Admiral Farragut Academy,AFA
+67,AR_Tidalstream,ARTS
+68,LMR_Curiosity Creek,CCTS
+69,AR_Dog Leg Creek,DCTS
+70,TCB_Frog Creek,FCTS
+71,OTB_Feather Sound Area,FSTS
+72,FS_Grassy Creek,GCTS
+73,LMR_Tidalstream,LMTS
+74,AR_Question Mark Creek,QCTS
+75,AR_Rice Creek,RCTS
+76,AR_Riverview Park West Creek,RPTS
+77,TCB_Tidalstream,TCTS
+78,LMR_Wildcat Creek,WCTS
+79,TCB_McMullen Creek,MCTS
+80,Bishop Harbor,BSH
+81,Palmetto Water Treatment (Plant),PWT
+82,St. Joseph Sound,SJS
+83,Clearwater Harbor,CH
+85,Egmont Key Reef,EKR
+86,Howard Frankland Reef,HFR
+87,Bahia Beach Reef,BBR
+88,Channel A,CHA
+89,Channel G,CHG
+90,Rocky Creek,RC
+91,Bishop Creek,BC
+92,Mullet Creek,MC
+93,Channel 5,CH5
+94,East Lake Outfall,EL-O
+95,Coopers Bayou,CPB
+96,Valrico Lake,VL
+97,Lake Roberta,LR
