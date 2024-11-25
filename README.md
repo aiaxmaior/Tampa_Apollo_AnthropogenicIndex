@@ -121,7 +121,23 @@ In a healthy ecosystem, SDI is expected to have a close relationship with Specie
 * Explore second model - SARIMAX, CCA and Passche Index Framework
 * Further tune Linear models to improve scoring
 
-## Dependencies
+## References
 
-*   List the specific software packages and libraries required to run
+Aarnio, K., Mattila, J., Törnroos, A., Bonsdorff, E., 2011. Zoobenthos as an environmental quality element: the ecological significance of sampling design and functional traits. 
+Airoldi, L., Beck, M.W., 2007. Loss, status and trends for coastal marine habitats of Europe. 
+Allan, J.D. 2004. Landscapes and riverscapes: The influence of land use on stream ecosystems. Allen, D., S. Haertel-Borer, B. Milan, D. Bushek, and R. Dame. 2007. Geomorphological determinants of nekton use of intertidal salt marsh creeks. 
+Allaire, J. J., Gandrud, C., Russell, K., and Yetman, C. (2017). networkD3: D3 JavaScript network graphs from R. Available at: https://CRAN.R-project.org/package-networkD3. 
+Anderson, M.J., Walsh, D.C.I., 2013. PERMANOVA, ANOSIM, and the Mantel test in the face of heterogeneous dispersions: what null hypothesis are you testing? 
+Andersen, K.H., Berge, T., Gonçalves, R.J., Hartvig, M., Heuschele, J., Hylander, S., Jacobsen, N.S., Lindemann, C., Martens, E.A., Neuheimer, A.B., Olsson, K., Palacz, A., Prowe, A.E.F., Sainmont, J., Traving, S.J., Visser, A.W., Wadhwa, N., Kiørboe, T., 2016. Characteristic sizes of life in the oceans, from bacteria to whales. 
+Appelberg, M., Berger, H.-M., Hesthagen, T., Kleiven, E., Kurkilahti, M., Raitaniemi, J., Rask, M., 1995. Development and intercalibration of methods in nordic freshwater fish monitoring. 
+Arnold Jr., C.L., and C.J. Gibbons. 1996. Impervious surface coverage: The emergence of a key environmental indicator. 
+Ash, T., and Runnels, R. (2005). Hard bottom habitats: an overview of mapping and monitoring needs on epibenthic communities in Tampa Bay, Florida. 
+Ávila-García, D., Morató, J., Pérez-Maussán, A. I., Santillán-Carvantes, P., and Alvarado, J. (2020). Impacts of alternative land-use policies on water ecosystem services in the Rio Grande de Comitan-Lagos de Montebello watershed. 
+Bauer, R.K., 2018. Oceanmap: A Plotting Toolbox for 2D Oceanographic Data. 
+Beauchard, O., Veríssimo, H., Queirós, A.M., Herman, P.M.J., 2017. The use of multiple biological traits in marine community ecology and its potential in ecological indicator development.
+Beck, M. W., Raulerson, G. E., and Sherwood, E. T. (2022). Tbep-tech/hmpu-workflow: v1.2.0. Zenodo.
+Beck, M.W., K.L. Heck Jr., K.W. Able, D.L. Childers, D.B. Eggleston, B.M. Gillanders, B.
+Halpern, C.G. Hays, L. Hoshino, T.
+
+
 
