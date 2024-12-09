@@ -26,28 +26,31 @@ import seaborn as sns
 
 ### Statistics Packages ###
 
+# Error Metrics
+from sklearn.metrics import mean_absolute_error
+
 # Operations
 from sklearn.model_selection import train_test_split
 
-#Time Series Analysis
+# Time Series Analysis
 import statsmodels.tsa as tsa
 from statsmodels.graphics.tsaplots import month_plot
 from statsmodels.tsa.api import VAR
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.seasonal import seasonal_decompose
 
-#VIF
+# VIF
 from statsmodels.stats.outliers_influence import variance_inflation_factor #VIF
 
-#Scalers
+# Scalers
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 
-#Regression
+# Regression
 from sklearn.linear_model import Lasso, Ridge
 from sklearn.linear_model import LinearRegression
 
-#NN
+# NN
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 
