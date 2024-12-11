@@ -27,12 +27,20 @@ compounds={
     'Nit': 'Nitrates',
     'Phos': 'Phosphate'
 }
+terminology={
+    'Anth.Gen.': 'Anthropogenic',
 
+}
+tests={
+    'ADF':'AugmentedDickey-Fuller Test'
+}
 dic={
     'measurement': measurements,
     'organization': organizations,
     'location': locations
 }
+
+
 dic_df=pd.DataFrame()
 dic_df=pd.DataFrame(pd.concat([pd.Series(measurements)
                                ,pd.Series(locations)
