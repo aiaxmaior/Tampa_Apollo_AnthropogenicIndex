@@ -1,10 +1,32 @@
 import pandas as pd
-import numpy as np
+import numpy as npim
 
-measurements= {'SDI':'Shannon Diversity Index',
-               'WQI' : 'Water Quality Index',
+# # # # # # # # # #      Data Dictionary Script      # # # # # # # # # # 
+# Notes:   
+
+# To access the data dictionary, run this script inside of the Jupyter notebook.
+
+# You can access the dictionary in two ways, in its dictionary form or as a df:
+
+
+
+
+
+######      Enables df to help describe terminology found in the notebooks and through the project
+
+########################### Data Dictionary applied in the Juptyer notebooks ########################
+#
+#      J:Brainstation\BS Git\Tampa_Apollo_AnthropogenicIndex\notebooks\Anthrogenic.ipynb
+#      J:\Brainstation\BS Git\Tampa_Apollo_AnthropogenicIndex\notebooks\AnthropogenicPressure_ProcEdaBLModel.ipynb.ipynb
+#      J:\Brainstation\BS Git\Tampa_Apollo_AnthropogenicIndex\notebooks\Benthic_EDA_beta.ipynb
+#      J:\Brainstation\BS Git\Tampa_Apollo_AnthropogenicIndex\notebooks\Final_A.P.Index_RNN.ipynb.ipynb
+#      J:\Brainstation\BS Git\Tampa_Apollo_AnthropogenicIndex\note notebooks\EstuarineEcosystems_ProcEdaBLModel.ipynb.ipynb
+      
+
+indices= {'SDI':'Shannon Diversity Index',          
+          'WQI' : 'Water Quality Index',
                'TBNI': 'Tampa Bay Nekton Index',
-               'TBBI':  'Tampa Bay Benthic Index',
+               'TBBI':  'Tampa Bay Benthic Index'
                                            
               }
 organizations= {'TBEP':'Tampa Bay Estuary Program',
@@ -16,6 +38,13 @@ organizations= {'TBEP':'Tampa Bay Estuary Program',
 
     
 }
+
+measurements={
+
+    'ug/L' : 'micrograms per liter- value: 10E-6',
+    'mg/G' : 'milligrams per liter- value: 10E-3'
+    }    
+
 locations={
     'HB': 'Hillsborough Bay',
     'MTB': 'Middle Tampa Bay',
@@ -37,7 +66,11 @@ tests={
 dic={
     'measurement': measurements,
     'organization': organizations,
-    'location': locations
+    'location': locations,
+    'indices': indices,
+    'compound': compounds,
+    'terminology': terminology,
+    'test':tests
 }
 
 
