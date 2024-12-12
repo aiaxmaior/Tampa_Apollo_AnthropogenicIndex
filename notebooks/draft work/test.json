@@ -1,0 +1,679 @@
+os.chdir('J:/Brainstation/BS Git/data/human Imact')
+# %%
+# There are 4 sections of Tampa Bay.
+# This study covers 2 but can expanded to all. Refer to map in introduction section
+# Import Middle Tampa Bay (MTB) Water Quality (WQ) data. 1990-2024
+mtbwq=pd.read_csv('MTB_WQ.csv',low_memory=False)
+# Import Hillsborough Bay (HB) W.Q. data. 1990-2024
+hbwq=pd.read_csv('HB_WTQ.csv',low_memory=False)
+# %% [markdown]
+# ##### Property Development
+# %%
+# New data directory
+os.chdir('J:/Brainstation/BS Git/Property Records')
+# %%
+proprx=pd.read_csv('PRIMARY_PROPRX.csv',low_memory='False')
+# %%
+Old Table read-ins from design phase using subset data
+# Subset dfs
+# Original Sectioned Property Records
+AB_1=pd.read_csv('AB_1.csv')
+AB_2=pd.read_csv('AB_BLVD_SPIT_1.csv')
+AB_3=pd.read_csv('AB_Central_1.csv')
+AB_4=pd.read_csv('AB_INTSXN_1.csv')
+AB_5=pd.read_csv('AB_SOUTH_1.csv')
+AB_6=pd.read_csv('AB_SOUTH_2.csv')
+AB_7=pd.read_csv('AB_SPIT_1.csv')
+GIB_8=pd.read_csv('GIB_MAIN_1.csv')
+RIV_1=pd.read_csv('RIV_W_1.csv')
+# %% [markdown]
+# ##### Population Growth
+# %%
+os.chdir('J:\\Brainstation\\BS Git\\data\\human Imact\\MarineTraffic')
+# %%
+dfpop_staged=pd.read_csv('StagedPopulations.csv')
+# %%
+# %% [markdown]
+# ## Feature Space 1: Nitrate Loading; Water Quality Index
+# %% [markdown]
+# Tables loaded in at start of notebook.<br>Tables:<BR>
+# > _(hbwq)_   Hillsborough Bay (HB)<br>
+# > _(mtbwq)_ Middle Tampa Bay (MTB)<br>
+# These 2 data sets are closest in proximmity to the study site, the focus of the study. <br>
+# This dataset can always be expanded at a later date.
+# 
+# Objective: <BR>Establish clear pattern between 3 forms of Nitrogen compounds in the bay:<br>
+# Nitrates and Nitrates (NO3,NO2-).   Ammonia/Ammonium (NH3).       Organic Nitrogen.
+# 
+# Key Info:<BR>
+# Nitrates/Nitrites (NO3, No2-), and ammonia(NH3/NH4+) are inorganic forms of nitrogen and either represent the slow breakdown of organic material or input from external sources. Part 1 must demonstrate that NH3 and N03 compound(s) vary, with significance, from behaviors and patterns observed in Organic Nitrogen.
+# mtbwq.head(5)
+# %%
+# Df read-in check
+hbwq.head(5)
+# %%
+# Df read-in check
+mtbwq.head(5)
+# %%
+#null check
+print(mtbwq.isna().sum())
+hbwq.isna().sum()
+# %%
+# Checking column names
+mtbwq.Actual_Latitude
+mtbwq.columns[[6,7]]
+# %%
+# Standardizing some columns between these 2 datasets
+# %%
+hbwq.rename(columns={'Latitude_DD':'Latitude','Longitude_DD':'Longitude'},inplace=True)
+hbwq.head(5)
+# %%
+# Standardizing some columns between these 2 datasets
+# %%
+mtbwq.rename(columns={'Actual_Latitude':'Latitude','Actual_Longitude':'Longitude'},inplace=True)
+mtbwq.head(5)
+# %%
+hbwq.Characteristic.value_counts()
+# %% [markdown]
+# ** This study uses Organic and Inorganic forms of nitrogen and phosphorous as a proxy for anthropogenic introduction of harmful chemicals into the bay. This study examines these 2 features in 2 main ways:<br>
+# - As an aggregate statistic that describes the functioning of the bay at large
+# - The  ratio of organic to inorganic  compounds that describe that extent of anthropogenic and ultimately harmful versions of these compounds introduced.
+# %%
+# looking specifically for the forms of Nitrogen.
+# Nitrogen comes in Nitrogen Organic, Nitrogen, Nitrates, Nitrites, Ammonia, Ammonium
+# HBWQ - Hillsborough Bay Water Quality
+# MTBWQ - Middle Tampa Bay Water Quality
+index_1=hbwq.Characteristic.str.contains('Nit,nit').index==True
+# %%
+len(index_1)
+# %%
+# Isolate Nit. in HB
+Nit=hbwq.Characteristic.str.contains('Nitrogen')
+# %%
+Nit.head()
+# %%
+# Phosphate isolation. Omitted.
+# Remnant from initial EDA 
+pho_hb=hbwq.Characteristic.str.contains('Phosph')
+# %% [markdown]
+# ### Data Wrangling, EDA / Pre-Processing
+# %% [markdown]
+# #### WQI Sample Frequency, Consistency Check
+# %%
+# Begin EDA, aggregations for patterns
+hbwq.SampleDate.str.slice(-4).value_counts().reset_index().sort_values(by='SampleDate')
+# %%
+hbwq.SampleDate=pd.to_datetime(hbwq.SampleDate)
+# %%
+mtbwq.SampleDate=pd.to_datetime(mtbwq.SampleDate)
+# %%
+# Sanity Check
+hbwq.head(3)
+# %%
+mtbwq.head(3)
+# %%
+#Look at sample counts over time.
+print(hbwq[hbwq.SampleDate.dt.year==1990].SampleDate.dt.month.value_counts().reset_index().sort_values(by='SampleDate'))
+hbwq[hbwq.SampleDate.dt.year==1990].SampleDate.dt.month.value_counts().reset_index().sort_values(by='SampleDate').hist()
+# %%
+# Checking for distribution of sample counts by month
+print(mtbwq[mtbwq.SampleDate.dt.year==1990].SampleDate.dt.month.value_counts().reset_index().sort_values(by='SampleDate'))
+mtbwq[mtbwq.SampleDate.dt.year==1990].SampleDate.dt.month.value_counts().reset_index().sort_values(by='SampleDate').hist()
+# %% [markdown]
+# #### _Preliminary EDA and processing of subset, 1990, used in initial EDA and construction of baseline models. CODE OUTDATED_
+# %%
+# MTB. HB. Isolate for 1990
+mtbwq1990=mtbwq[mtbwq.SampleDate.dt.year==1990]
+hbwq1990=hbwq[hbwq.SampleDate.dt.year==1990]
+# %%
+# Exploring at data for 1 month
+mtbwq1990[mtbwq1990.SampleDate.dt.month==1].sort_values(by='SampleDate')
+# %%
+# Format dt values
+mtbwq.SampleDate=pd.to_datetime(mtbwq.SampleDate)
+hbwq.SampleDate=pd.to_datetime(hbwq.SampleDate)
+# %%
+# Look at sampling
+hbwq1990_samplefreq=hbwq1990.SampleDate.value_counts().reset_index().sort_values(by='SampleDate').reset_index(drop=True)
+hbwq1990_samplefreq.SampleDate.hist()
+# %%
+# Looking for missing weekly samples
+import matplotlib.dates as mdates
+plt.figure(figsize=(15,4))
+sns.histplot()
+ax = sns.histplot(x=hbwq1990_samplefreq.SampleDate,bins=365)
+ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=1))
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+plt.xticks(rotation=45)
+#plt.xticks(range('1990-01-01','1990-12-31', 365))
+plt.show()
+# %%
+#sanity
+hbwq1990.head(2)
+# %%
+# Isolate Nitrates, complete examination of subset of data
+nitrogen_1990=hbwq1990[hbwq1990.Characteristic.str.contains('Nitr','nitr')==True]
+nitrogen_1990.head(5)
+# %% [markdown]
+# ##### EDA: Isolation of Nitrogen Compounds, 1990 subset
+# %% [markdown]
+# The dataset has multiple entries for each sample event. The same sample is analyzed and described in multiple ways. Consequently, data needs to be isolated to get a consistent single data set.
+# %%
+# Create Phosphate df
+phosphate_hb=hbwq[hbwq.Characteristic.str.contains('Phos','phos')==True]
+phosphate_hb.SampleDate=pd.to_datetime(phosphate_hb.SampleDate)
+phosphate_hb.head(2)
+# %%
+#Isolate Phosphate
+phosphate_1990=hbwq1990[hbwq1990.Characteristic.str.contains('Phos','phos')==True]
+phosphate_1990.head(5)
+# %%
+# Checking Units
+pd.concat([nitrogen_1990.Characteristic.value_counts(),nitrogen_1990.ResultUnit.value_counts()],axis=1)
+# %%
+# Isolate Nit
+nitrate1990=nitrogen_1990[nitrogen_1990.Characteristic.str.contains('Nitrogen, Nitrite')]
+print(nitrate1990.shape)
+nitrate1990.reset_index(drop=True,inplace=True)
+nitrate1990.head(3)
+# %%
+# Test nitrate isolation
+nitrate1990[nitrate1990.ResultUnit.isna()]
+nitrate1990.ResultUnit.fillna('ug/l',inplace=True)
+nitrate1990[nitrate1990.ResultUnit.isna()]
+# %%
+# Standardize units
+for i in nitrate1990.index:
+    if nitrate1990.loc[i,'ResultUnit']=='ug/l':
+        nitrate1990.loc[i,'ResultValue']=nitrate1990.loc[i,'ResultValue']/1000
+        nitrate1990.loc[i,'ResultUnit']='mg/l'
+        #ammonia1990.ResultValue=ammonia1990.ResultValue/1000
+# %%
+# Create subset with features of interest
+nitrate_subset=nitrate1990[['DataSourceName','StationID','SampleDate','SampleTime','ResultValue','ResultUnit','Latitude','Longitude']]
+# %%
+# date format
+nitrate_subset['month']=nitrate_subset.SampleDate.dt.month
+nitrate_subset
+# %%
+# look at nitrate patterns over 1 year period
+nitrate_subset_plot=nitrate_subset.groupby('month').ResultValue.agg(['mean','std','min','max'])
+nitrate_subset_plot.head(12)
+# %%
+# Isolate ammmonia
+ammonia1990=nitrogen_1990[nitrogen_1990.Characteristic.str.contains('ammon')].sort_values(by='SampleDate').reset_index(drop=True)
+print(ammonia1990.shape)
+ammonia1990.head()
+# %%
+# Check for units for standardization
+ammonia1990.ResultUnit.value_counts()
+# %%
+# Will need to standardize units
+ammonia1990[ammonia1990.ResultUnit=='ug/l'].ResultValue
+# %%
+# Std. ammonia units
+for i in ammonia1990.index:
+    if ammonia1990.loc[i,'ResultUnit']=='ug/l':
+        ammonia1990.loc[i,'ResultValue']=ammonia1990.loc[i,'ResultValue']/1000
+        ammonia1990.loc[i,'ResultUnit']='mg/l'
+        #ammonia1990.ResultValue=ammonia1990.ResultValue/1000
+# %%
+ammonia1990.ResultUnit.value_counts()
+# %%
+ammonia_subset=ammonia1990[['DataSourceName','StationID','SampleDate','SampleTime','ResultValue','ResultUnit','Latitude','Longitude']]
+# Added comments to explain the code and added a blank line for readability
+# Isolate data for 1990
+mtbwq1990 = mtbwq[mtbwq.SampleDate.dt.year == 1990]
+hbwq1990 = hbwq[hbwq.SampleDate.dt.year == 1990]
+# Exploring data for January 1990
+mtbwq1990[mtbwq1990.SampleDate.dt.month == 1].sort_values(by='SampleDate')
+# Format datetime values
+mtbwq.SampleDate = pd.to_datetime(mtbwq.SampleDate)
+hbwq.SampleDate = pd.to_datetime(hbwq.SampleDate)
+# Look at sampling frequency for 1990
+hbwq1990_samplefreq = hbwq1990.SampleDate.value_counts().reset_index().sort_values(by='SampleDate').reset_index(drop=True)
+sns.histplot(x=hbwq1990_samplefreq.SampleDate, bins=365)
+plt.show()
+# Sanitize data
+hbwq1990.head(2)
+# Isolate nitrates for 1990
+nitrogen_1990 = hbwq1990[hbwq1990.Characteristic.str.contains('Nitr', 'nitr') == True]
+nitrogen_1990.head(5)
+# Create phosphate dataframe
+phosphate_hb = hbwq[hbwq.Characteristic.str.contains('Phos', 'phos') == True]
+phosphate_hb.SampleDate = pd.to_datetime(phosphate_hb.SampleDate)
+phosphate_hb.head(2)
+# Isolate phosphates for 1990
+phosphate_1990 = hbwq1990[hbwq1990.Characteristic.str.contains('Phos', 'phos') == True]
+phosphate_1990.head(5)
+# Checking units
+pd.concat([nitrogen_1990.Characteristic.value_counts(), nitrogen_1990.ResultUnit.value_counts()], axis=1)
+# Isolate nitrate data for 1990
+nitrate1990 = nitrogen_1990[nitrogen_1990.Characteristic.str.contains('Nitrogen, Nitrite')]
+print(nitrate1990.shape)
+nitrate1990.reset_index(drop=True, inplace=True)
+nitrate1990.head(3)
+# Test nitrate isolation
+nitrate1990[nitrate1990.ResultUnit.isna()]
+nitrate1990.ResultUnit.fillna('ug/l', inplace=True)
+nitrate1990[nitrate1990.ResultUnit.isna()]
+# Standardize units
+for i in nitrate1990.index:
+    if nitrate1990.loc[i, 'ResultUnit'] == 'ug/l':
+        nitrate1990.loc[i, 'ResultValue'] = nitrate1990.loc[i, 'ResultValue'] / 1000
+        nitrate1990.loc[i, 'ResultUnit'] = 'mg/l'
+# Create subset with features of interest
+nitrate_subset = nitrate1990[['DataSourceName', 'StationID', 'SampleDate', 'SampleTime', 'ResultValue', 'ResultUnit', 'Latitude', 'Longitude']]
+# Format date as month
+nitrate_subset['month'] = nitrate_subset.SampleDate.dt.month
+nitrate_subset
+# Look at nitrate patterns over 1 year period
+nitrate_subset_plot = nitrate_subset.groupby('month').ResultValue.agg(['mean', 'std', 'min', 'max'])
+nitrate_subset_plot.head(12)
+# Isolate ammonia data for 1990
+ammonia1990 = nitrogen_1990[nitrogen_1990.Characteristic.str.contains('ammon')].sort_values(by='SampleDate').reset_index(drop=True)
+print(ammonia1990.shape)
+ammonia1990.head()
+# Check units for standardization
+ammonia1990.ResultUnit.value_counts()
+# Standardize units
+for i in ammonia1990.index:
+    if ammonia1990.loc[i, 'ResultUnit'] == 'ug/l':
+        ammonia1990.loc[i, 'ResultValue'] = ammonia1990.loc[i, 'ResultValue'] / 1000
+        ammonia1990.loc[i, 'ResultUnit'] = 'mg/l'
+# Create subset with features of interest
+ammonia_subset = ammonia1990[['DataSourceName', 'StationID', 'SampleDate', 'SampleTime', 'ResultValue', 'ResultUnit', 'Latitude', 'Longitude']]
+## This value will get removed when the dataset time period is reduced
+kjeldahl_mg[kjeldahl_mg.ResultValue>10]
+# %%
+nitrates_mg_temp=nitrates_mg.reset_index()
+#nitrates_mg[nitrates_mg.ResultValue>3].reset_index()
+nit_iloc=nitrates_mg_temp[nitrates_mg_temp.ResultValue>2.5].index
+for i in nit_iloc:
+    nitrates_mg.iloc[i,-2]=nitrates_mg.iloc[i,-2]/1000
+# %%
+# standardize units
+kjeldahl_mg['month']=kjeldahl_mg.SampleDate.dt.month
+ammonia_mg['month']=ammonia_mg.SampleDate.dt.month
+nitrates_mg['month']=nitrates_mg.SampleDate.dt.month
+# %%
+# Isolate features of interest
+kjeldahlsub=kjeldahl_mg[['DataSourceName','StationID','SampleDate','SampleTime','ResultValue','ResultUnit','Latitude','Longitude','month']]
+ammoniasub=ammonia_mg[['DataSourceName','StationID','SampleDate','SampleTime','ResultValue','ResultUnit','Latitude','Longitude','month']]
+nitratesub=nitrates_mg[['DataSourceName','StationID','SampleDate','SampleTime','ResultValue','ResultUnit','Latitude','Longitude','month']]
+# %%
+# Using a temp table to work around coding errors
+# Looking at outlier data. Assess whether unit conv was issue
+index_amm_temp=ammoniasub[ammoniasub.ResultValue>3].index
+ammoniasub.loc[index_amm_temp].ResultValue=ammoniasub.loc[index_amm_temp].ResultValue/1000
+# %%
+# station suspected culprit for outlier values
+kjeldahl_mg[kjeldahl_mg.StationID=='560']
+# %%
+# create year col
+kjeldahlsub['year']=kjeldahlsub.SampleDate.dt.year
+ammoniasub['year']=ammoniasub.SampleDate.dt.year
+nitratesub['year']=nitratesub.SampleDate.dt.year
+# %%
+# creating a col that sets all months to a starting day of 1
+kjeldahlsub['day']=1
+ammoniasub['day']=1
+nitratesub['day']=1
+# %%
+# format dt
+kjeldahlsub['DateMonth']=pd.to_datetime(kjeldahlsub.astype(str).month+'-'+kjeldahlsub.astype(str).day+'-'+kjeldahlsub.astype(str).year)
+ammoniasub['DateMonth']=pd.to_datetime(ammoniasub.astype(str).month+'-'+ammoniasub.astype(str).day+'-'+ammoniasub.astype(str).year)
+nitratesub['DateMonth']=pd.to_datetime(nitratesub.astype(str).month+'-'+nitratesub.astype(str).day+'-'+nitratesub.astype(str).year)
+# %%
+# isolate dataset to years of interest in the study
+kjeldahlsub=kjeldahlsub[kjeldahlsub.year>1989]
+nitratesub=nitratesub[nitratesub.year>1989]
+ammoniasub=ammoniasub[ammoniasub.year>1989]
+# %%
+# create better date column
+nitratesub.SampleDate=pd.to_datetime(nitratesub.SampleDate.astype(str).str.slice(0,10))
+kjeldahlsub.SampleDate=pd.to_datetime(kjeldahlsub.SampleDate.astype(str).str.slice(0,10))
+ammoniasub.SampleDate=pd.to_datetime(ammoniasub.SampleDate.astype(str).str.slice(0,10))
+# %%
+#outlier check
+kjeldahlsub[kjeldahlsub.ResultValue>4]
+# %% [markdown]
+#  
+# %% [markdown]
+# **Only Kjeldahl in the filtered dataset follow a normal distribution, whereas Nitrates and Ammonia are heavily right-skew**
+# <br>
+# %%
+### Only Kjeldahl has a normal distribution
+plt.hist(kjeldahlsub.ResultValue,bins=50)
+#"plt.yscale('log')
+plt.title('distribution of kjeldahl values at log scale')
+plt.text(1.5, 100, f'Num of kjel val above 2mg/L= {kjeldahlsub[kjeldahlsub.ResultValue>4].ResultValue.count()}', bbox=dict(facecolor='white', alpha=0.5))
+plt.show()
+# %%
+plt.hist(nitratesub.ResultValue,bins=50)
+plt.yscale('log')
+plt.title('distribution of nitrate values at log scale')
+plt.text(1.5, 100, f'Num of NO3 val above 2mg/L= {nitratesub[nitratesub.ResultValue>2].ResultValue.count()}', bbox=dict(facecolor='white', alpha=0.5))
+plt.show()
+# %%
+plt.hist(ammoniasub.ResultValue,bins=50)
+plt.yscale('log')
+plt.title('distribution of ammonia values at log scale')
+plt.text(1.5, 100, f'Num of NH3 val above 2mg/L= {ammoniasub[ammoniasub.ResultValue>2].ResultValue.count()}', bbox=dict(facecolor='white', alpha=0.5))
+plt.show()
+# %%
+# Setting checkpoint
+ksub=kjeldahlsub.copy()
+asub=ammoniasub.copy()
+nsub=nitratesub.copy()
+# %%
+# Adding some columns to standardize dates and make next steps easier
+ksub['week']=ksub.SampleDate.dt.isocalendar().week
+asub['week']=asub.SampleDate.dt.isocalendar().week
+nsub['week']=nsub.SampleDate.dt.isocalendar().week
+ksub['adj_date']=pd.to_datetime(ksub['year'].astype(str) + '-W' + ksub['week'].astype(str) + '-1', format='%Y-W%W-%w')
+asub['adj_date']=pd.to_datetime(asub['year'].astype(str) + '-W' + asub['week'].astype(str) + '-1', format='%Y-W%W-%w')
+nsub['adj_date']=pd.to_datetime(nsub['year'].astype(str) + '-W' + nsub['week'].astype(str) + '-1', format='%Y-W%W-%w')
+ksub.drop(columns='DateMonth',inplace=True)
+asub.drop(columns='DateMonth',inplace=True)
+nsub.drop(columns='DateMonth',inplace=True)
+ksub.sort_values(by='SampleDate',inplace=True)
+asub.sort_values(by='SampleDate',inplace=True)
+nsub.sort_values(by='SampleDate',inplace=True)
+# %%
+# There are missing weeks that need to be imputed. This should be weekly data from 1990-2024
+# Creating a df with all weeks, including missing values. Will outer join all nitrate groups, remove duplicates, impute or interpolate missing values
+data = []
+for year in range(1990, 2025):  # 24 years from 1990 to 2024
+    for week in range(1, 53):  # Weeks 1 to 52
+        data.append([year, week])
+weekly=pd.DataFrame(data=data,columns=['year','week'])
+weekly['adj_date']=pd.to_datetime(weekly['year'].astype(str) + '-W' + weekly['week'].astype(str) + '-1', format='%Y-W%W-%w')
+print(len(data))
+print(len(weekly))
+print(weekly.min())
+weekly.max()
+# %%
+# Make sure the datasets are as clean as possible (missing values dealt with later)
+ksub.drop_duplicates(inplace=True)
+asub.drop_duplicates(inplace=True)
+nsub.drop_duplicates(inplace=True)
+print(ksub.shape)
+print(asub.shape)
+print(nsub.shape)
+# %%
+# outer join kjeldahl df, no loss of data
+test=weekly.merge(ksub,left_on=weekly.adj_date,right_on=ksub.adj_date,how='outer',suffixes=('_dt','_K'))
+# %%
+# adj_date_dt remains complete, dropping key_0
+test.info()
+test.drop(columns='key_0',inplace=True)
+test.head(2)
+# %%
+# outer join ammonia results, no loss of data
+# all units are standardized to mg/l
+# need to keep key_0 as it's the only complete date column.
+test2=test.merge(asub['ResultValue'],left_on=[test.adj_date_dt,test.DataSourceName,test.StationID],right_on=[asub.adj_date,asub.DataSourceName,asub.StationID],how='outer',suffixes=('_dt','_A')).drop_duplicates()
+test2.rename(columns={'key_0':'adj_date'},inplace=True)
+test2.drop(columns=['key_1','key_2'],inplace=True)
+# %%
+# outer join nitrate results, no loss of data
+# all units are standardized to mg/l
+# last merge
+test3=test2.merge(nsub['ResultValue'],left_on=[test2.adj_date,test2.DataSourceName,test2.StationID],right_on=[nsub.adj_date,nsub.DataSourceName,nsub.StationID],how='outer',suffixes=('_dt','_N')).drop_duplicates()
+# %%
+test3.info()
+# %%
+# Isolate columns of interest
+nmerge_stage=test3[test3.columns[[0,7,13,14,11,20,21]]]
+# %%
+nmerge_stage.head(1)
+# %%
+# Rename columns
+nmerge_stage.columns=['date_adj','DataSourcveName','Lat','Long','ResultValue_K','ResultValue_A','ResultValue_N']
+print(nmerge_stage.shape)
+nmerge_stage.head(2)
+# %%
+# Establish independent copy of merged base table
+nmerge_base=nmerge_stage.copy()
+# %%
+nmerge_base[nmerge_base.ResultValue_N>2]
+# %%
+# Aggregate at weekly date intervals
+nmerge_stage2=nmerge_stage.groupby('date_adj').agg({
+    'ResultValue_K':'mean',
+    'ResultValue_A':'mean',
+    'ResultValue_N':'mean'
+})
+# %%
+# Extra weeks beyond the end of the dataset (8/26/24)
+# Cut out extra weeks
+# Check for nulls
+nmerge_stage3=nmerge_stage2.iloc[:-17,:]
+nmerge_stage3.isna().sum()
+# %% [markdown]
+# There are fewer missing values than expected! That's good, interpolation shouldn't be a problem. <br>
+# Seasonality shouldn't be expected for periods less than a month. <br>
+# Interpolation with 2 period in both directions should give best approximation of values.<br>
+# %%
+nmerge=nmerge_stage3.interpolate(method='linear', limit_direction='both', limit=2)
+# %%
+print(f'{nmerge.info()}\n\n\nSHAPE:\n{nmerge.shape}\n\n\n\nDESCRIBE:\n{nmerge.describe()}')
+nmerge.head(2)
+# %%
+print(f'nmerge shape:\n {nmerge.shape}\n')
+print(f'######\n\nMerge1 duplicates: \n{nmerge.duplicated().value_counts}\n\n######\nResultAction:')
+if nmerge.duplicated().any():
+    print('True.Duplicates, drop\n')
+    nmerge.drop_duplicates(inplace=True)
+else:
+    print('False. No Duplicates, no drop\n')
+print(f'######\n\nNulls:\n{nmerge.isna().sum()}\n')
+print(f'######\nnew shape:{nmerge.shape}')
+if nmerge.columns[0]=='key_0':
+    print('Newly created key columns not dropped\nColumns now dropped')
+    nmerge.drop(columns=nmerge.columns[[0,1,2]],inplace=True)
+else:
+    print('Columns not dropped')
+nmerge.head(3)
+# %%
+# change directory for exporting of df
+os.chdir('J:\\Brainstation\\BS Git\\human Imact\\Nutrient_loading')
+# %%
+ksub.to_csv('kjeldahl.csv')
+nsub.to_csv('nitrate.csv')
+asub.to_csv('ammonia.csv')
+nmerge.to_csv('nit_merged_mean.csv')
+
+
+### Part 1: Introduction and Data Exploration
+
+### Plotting Nitrogen Concentrations
+
+# Create a figure with two subplots
+fig, ax = plt.subplots(figsize=(12,8))
+sns.lineplot(x=nmerge.index, y=nmerge.ResultValue_K, label='Kjeldahl', color='green')
+ax1=ax.twinx()
+sns.lineplot(x=nmerge.index, y=nmerge.ResultValue_A, label='Ammonia', color='yellow')
+sns.lineplot(x=nmerge.index, y=nmerge.ResultValue_N, label='Nitrates', color='red')
+plt.title('Concentrations of Nitrogen compounds in Tampa Bay, 1990-2024')
+plt.xlabel('Date')
+plt.ylabel('Concentrations of Compounds (mg/l)')
+plt.yscale('log')
+
+### Plotting Moving Averages
+
+nmerge['K_moving_average'] = nmerge.ResultValue_K.rolling(window=36).mean()
+nmerge['A_moving_average'] = nmerge.ResultValue_A.rolling(window=36).mean()
+nmerge['N_moving_average'] = nmerge.ResultValue_N.rolling(window=36).mean()
+
+plt.figure(figsize=(7,7))
+nmerge.ResultValue_K.plot(color='b')
+nmerge.K_moving_average.plot(color='g', lw=4)
+plt.yscale('log')
+
+### Plotting Nitrogen Loading Conclusions
+
+# Create a figure with three subplots
+fig, ax = plt.subplots(figsize=(8,15))
+ax1=ax.twinx()
+plt.subplot(3,1,1)
+nmerge.ResultValue_K.hist(color='g', label='Kjeldahl')
+plt.subplot(3,1,2)
+nmerge.ResultValue_A.hist(color='y', label='Ammonia')
+plt.subplot(3,1,3)
+nmerge.ResultValue_N.hist(color='r', label='Nitrate')
+plt.legend()
+plt.suptitle('Distribution of Nitrogen Compounds Concentration Measurements')
+plt.tight_layout()
+
+### Data Preprocessing
+
+# Check the index of the dataframe
+print(nmerge.index)
+
+# Perform seasonal decomposition on Kjeldahl data
+result = seasonal_decompose(pd.Series(nmergeK), model='additive')  # or model='multiplicative'
+trend = result.trend
+seasonal = result.seasonal
+residual = result.resid
+
+### VAR Model Preparation
+
+VAR_data=nmerge.iloc[:,0:3]
+rolling_avg_data=nmerge.iloc[:,:-3]
+
+# Scale data using MinMaxScaler
+scaler1=MinMaxScaler()
+scaler2=MinMaxScaler()
+
+scaler1.fit(VAR_data)
+VAR_scaled = pd.DataFrame(scaler1.transform(VAR_data), columns=VAR_data.columns, index=VAR_data.index)
+
+scaler2.fit(rolling_avg_data)
+rolling_scaled=pd.DataFrame(scaler2.transform(rolling_avg_data), columns=rolling_avg_data.columns, index=rolling_avg_data.index)
+
+### Plotting VAR Data
+
+plt.subplots(figsize=(10,8))
+plt.subplot(2,1,1)
+plt.plot(VAR_scaled,lw=4)
+plt.subplot(2,1,2)
+plt.plot(rolling_scaled,lw=4)
+plt.legend()
+
+### Splitting Data for Training and Testing
+
+train_data, test_data = train_test_split(VAR_data, test_size=0.3, shuffle=False)
+
+# Scale data
+scaler=MinMaxScaler()
+scaler.fit(train_data)
+train_data_scaled = pd.DataFrame(scaler.transform(train_data), columns=train_data.columns, index=train_data.index)
+test_data_scaled = pd.DataFrame(scaler.transform(test_data), columns=test_data.columns, index=test_data.index)
+
+# Load property data from CSV files
+import pandas as pd
+
+# Define a list of CSV file names
+csv_files = ['AB_1.csv', 'AB_2.csv', 'AB_3.csv', 'AB_4.csv', 
+             'AB_5.csv', 'AB_6.csv', 'AB_7.csv', 'GIB_8.csv', 
+             'RIV_1.csv']
+
+# Load each CSV file into a DataFrame
+dfs = [pd.read_csv(csv_file) for csv_file in csv_files]
+
+# Concatenate all DataFrames into one
+dfprop = pd.concat(dfs, axis=0)
+
+# Select specific columns of interest
+cols_of_interest = [0, 3, 13, 14, 15, 25, 27, 30, 36, 40, 42]
+dfprop_selected = dfprop.loc[:, cols_of_interest]
+
+# Drop duplicate rows and missing values
+dfprop_selected.drop_duplicates(inplace=True)
+dfprop_selected.dropna(inplace=True)
+
+# Fill missing values in 'VacantImproved' column with default value
+dfprop_selected['VacantImproved'].fillna('Improved', inplace=True)
+
+# Identify common traits in properties with missing built date
+common_traits = dfprop_selected[dfprop_selected['YearBuilt'] == 0].PropertyType.unique()
+
+# Select only relevant columns for further analysis
+cols_for_analysis = ['SITE_CITY', 'ACT', 'ACREAGE', 'tUNITS', 'tBLDGS', 'HEAT_AR']
+dfprop_for_analysis = dfprop.loc[:, cols_for_analysis]
+
+# Group data by city, year built, acreage, units, buildings, and heat area
+grouped_data = dfprop_for_analysis.groupby(['SITE_CITY', 'ACT', 'ACREAGE', 'tUNITS', 'tBLDGS', 'HEAT_AR'])['ACT'].agg({'mean': 'mean', 'min': 'min', 'max': 'max'})
+
+# Aggregate house construction by year
+annual_built = grouped_data.reset_index().groupby('ACT').ACT.sum().reset_index()
+
+# Isolate data for 1989-2024
+annual_built = annual_built[(annual_built['ACT'] >= 1989) & (annual_built['ACT'] <= 2024)]
+
+# Print summary statistics for analysis
+print(annual_built.describe())
+
+
+# Set working directory to Population Data folder
+os.chdir('J:\\Brainstation\\Capstone Git\\data\\human Imact\\Population Data')
+
+# Load Tampa Metro population data from CSV file
+pop_metro = pd.read_csv('tampa_metro_population.csv', header=0)
+
+# Get information about the DataFrame
+pop_metro.info()
+
+# Print the first few rows of the DataFrame
+print(pop_metro.head())
+
+# Create a line plot to visualize the population over time
+sns.lineplot(x='Year', y='Population', data=pop_metro)
+plt.xlabel('Year')
+plt.ylabel('Population')
+plt.title('Tampa Regional Population Over Time')
+plt.show()
+
+# Create a scatter plot with log-transformed population on the y-axis
+sns.scatterplot(x='Year', y=np.log(pop_metro.Population), data=pop_metro)
+plt.xlabel('Year')
+plt.ylabel('Population (per 100k)')
+plt.title('Tampa Regional Population Over Time')
+plt.show()
+
+# Create a Linear Regression model
+LinRegLog = LinearRegression()
+
+# Define the features (X) and target variable (y)
+X = pop_metro.Year.to_frame()
+y = pop_metro.Population
+
+# Fit the model to the data
+LinRegLog.fit(X, y)
+
+# Get the R-squared value for the training set
+print(LinRegLog.score(X, y))
+
+# Print the coefficients of the model
+print(LinRegLog.coef_)
+
+# Split the data into training and testing sets (20% for testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Fit the model to the training set
+LinRegLog.fit(X_train, y_train)
+
+# Get the R-squared value for both the training and testing sets
+print(LinRegLog.score(X_train, y_train))
+print(LinRegLog.score(X_test, y_test))
+
+# Print the current working directory (pwd)
+import getpass
+import os
+
+print(getpass.getuser())
+
+# Change working directory to Property Records folder
+os.chdir('J:\\Brainstation\\BS Git\\Property Records\\GIS\\Zips\\')
