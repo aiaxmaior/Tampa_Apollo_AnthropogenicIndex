@@ -74,7 +74,7 @@ dic={
 }
 
 
-dic_df=pd.DataFrame()
+dic_df=pd.DataFrame(columns=['definition'])
 dic_df=pd.DataFrame(pd.concat([pd.Series(measurements)
                                ,pd.Series(locations)
                                ,pd.Series(compounds)
