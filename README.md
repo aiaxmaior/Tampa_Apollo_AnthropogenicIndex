@@ -2,31 +2,30 @@ __Author__: Arjun Joshi. <br>
 __Brainstation__: Data Science Diploma course<br>
 __December 2024__ <br>
 ![Animated Gif](./img/header_readme.png)
-<br>
+<br><br>
+[Navigating the GitHub Repo](#navigating-the-github-repo)<br>
+
 ## Table of Contents
 
-[Organization & Documentation](#docs)
-- [Table of Contents](#table-of-contents)
-    - [Navigating the GitHub Repo](#navigating-the-github-repo)
-- [1. Introduction](#1-introduction)
-- [i.  Research Review, Indices](#i--research-review-indices)
-- [2. Project Description and objective](#2-project-description-and-objective)
-- [3. Current Status](#3-current-status)
-- [4. Progress History](#4-progress-history)
-- [5.Model Design](#5model-design)
-    - [API Design](#api-design)
-- [6. EDA, Pre-Processing](#6eda-pre-processing)
-    - [Marine Ecosystems](#marine-ecosystems)
-    - [Anthropogenic Pressure](#anthropogenic-pressure)
-- [7.Baseline Models](#7baseline-models)
-- [8. Formation of the API](#8-formation-of-the-api)
-- [9. Results of Anthropogenic Modelling and Conclusions](#9-results-of-anthropogenic-modelling-and-conclusions)
-- [10. Further considerations](#10-further-considerations)
-- [11. References](#11-references)
-- [12. Acknowledgements](#12-acknowledgements)
-- [13. License](#13-license)
-- [Previously recorded changes to the study:](#previously-recorded-changes-to-the-study)
-#### Navigating the GitHub Repo
+1. [Introduction](#1-introduction)
+    + [ Indicator Index Review ](i.-#research-review)
+2. [Project Description and objective](#2-project-description-and-objective)
+3. [Current Status](#3-current-status)
+4. [Progress History](#4-progress-history)
+5. [Model Design](#5model-design)
+    + [API Design](#api-design)
+6. [EDA, Pre-Processing](#6eda-pre-processing)
+    + [Marine Ecosystems](#marine-ecosystems)
+    + [Anthropogenic Pressure](#anthropogenic-pressure)
+7. [Baseline Models](#7baseline-models)
+8. [Formation of the API](#8-formation-of-the-api)
+9. [Results of Anthropogenic Modelling and Conclusions](#9-results-of-anthropogenic-modelling-and-conclusions)
+10. [Further considerations](#10-further-considerations)
+11. [References](#11-references)
+12. [Acknowledgements](#12-acknowledgements)
+13. [License](#13-license)
+
+#### [Navigating the GitHub Repo](#navigating-the-github-repo)
 Jupyter Notebooks can be used to follow the order of the study.
 This phase of the research has been consolidated into 3 notebooks and should be revieved in the following order:
 
@@ -76,10 +75,18 @@ $$
 H = \sum_{j=1}^{s} p_{i} ln(p_{i})
 $$
 
-**Anthropogenic Pressure Index**: A proposed index to measure human impact, considering chemical pollution, coastal development, and population growth:
-<center>(API = 𝜔_1 𝑧_1+𝜔_2 𝑧_2+…+𝜔_𝑛 𝑧_𝑛@)</center>
-<br>
+**Anthropogenic Pressure Index**: A proposed index to measure human impact, considering chemical pollution, coastal development, and population growth
 
+$$
+API = 𝜔_1 𝑧_1+𝜔_2 𝑧_2+…+𝜔_𝑛 𝑧_𝑛
+$$
+
+Where:<br><br> 
+__$w_i$__  : represents the relative weight of any given human-based impacting calculated factor<br>
+__$z_1$__  : is a standardized value of each human-based impacting factor using a Min-Max scaler<br>
+
+[Catalog of Changes to Study](#previously-recorded-changes-to-the-study)
+<br><br>
 
 ## 2\. [Project Description and objective](#projectobj)
 
