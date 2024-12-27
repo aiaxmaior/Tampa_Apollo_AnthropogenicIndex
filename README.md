@@ -8,7 +8,7 @@ __December 2024__ <br>
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-    + [ Indicator Index Review ](i.-#research-review)
+    + [Indicator Index Review ](+#research-review)
 2. [Project Description and objective](#2-project-description-and-objective)
 3. [Current Status](#3-current-status)
 4. [Progress History](#4-progress-history)
@@ -24,22 +24,24 @@ __December 2024__ <br>
 11. [References](#11-references)
 12. [Acknowledgements](#12-acknowledgements)
 13. [License](#13-license)
-
-#### [Navigating the GitHub Repo](#navigating-the-github-repo)
+___
+### [Navigating the GitHub Repo](#navigating-the-github-repo)
 Jupyter Notebooks can be used to follow the order of the study.
-This phase of the research has been consolidated into 3 notebooks and should be revieved in the following order:
+This phase of the research has been consolidated into 3 notebooks and should be revieved in the following order
+<p></p>
 
-1. 'EstuarineEcosystems_ProcEdaBLModel.ipynb'
-2. 'AnthropogenicPressure_ProcEdaBLModel.ipynb'
-3. 'A.P.Index_RNN.ipynb'
-4. Data sources, a data dictionary and references are catalouged in '_Documentation.docx'
-5. Stored scripts for library importing, data dictionary and functions are located in the notebooks folder.
-6. Additional jupyter workbooks are stored in the repo. There is lost progress in the geospatial notebook, it was omitted from the study.
+| Notebook  | Content |
+| ------------- | ------------- |
+| [1. Marine Ecosystem Review](notebooks/EstuarineEcosystems_ProcEdaBLModel_FINAL.ipynb)|EDA & Baseline Models|
+| [2. Anthropogenic Pressure Factors](notebooks/AnthropogenicPressure_ProcEdaBLModel_FINAL.ipynb)|EDA, Baseline & Advanced Models|
+| [3. Advanced Modelling](notebooks/Final_A.P.Index_RNN_FINAL.ipynb)| Formation of API, Advanced Models|
+| [4, Data Sources](data_sources.txt)|Data Sources, Links|
+| [5, References](y.txt)|Cited Literature|
 
 *General Note*: I recommend enabling scrolling for cell output in the notebook for easier reading.
 
 
-## 1. [Introduction](#introduction)
+## 1\. [Introduction](#introduction)
 This project is associated with an ongoing effort to build a commercial dock in Apollo Beach, Florida, a coastal community located in 'Middle Tampa Bay'. Coastal construction of any kind significantly impacts the health of local ecosystems, introducing harmful chemicals, causing physical damage, and a range of other factors that disrupt the local ecosystem.
 
 The construction of a new dock will inevitably damage local habitats, impacting species diversity and reducing the ecosystem's resilience. There are numerous unique characteristics of any ecosystem that are of significance, however this research focuses on 3 primary environments – open water, seafloor & human coastal communities. 
@@ -59,7 +61,7 @@ The construction of a new dock will inevitably damage local habitats, impacting 
 Changes in the eastern coast of Tampa bay in the past 70 years. circles represent sampling stations used to collect data. Their strategic placement is better understood when looking at the original state of the habitat as opposed to its current, over-developed form.
 <br>
 
-## i.  [Research Review, Indices](#research-review)
+### <ins>Research Review</ins> [](#research-review)
 
 The most common approach to estimate marine ecosystem health is, not too surprisingly, to examine past relationships of ecosystem health to which may then be substiated by human driven impacts.
 
