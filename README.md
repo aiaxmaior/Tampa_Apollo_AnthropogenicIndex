@@ -8,7 +8,7 @@ __December 2024__ <br>
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-    + [Indicator Index Review ](+#research-review)
+    + [Indicator Index Review ](#research-review)
 2. [Project Description and objective](#2-project-description-and-objective)
 3. [Current Status](#3-current-status)
 4. [Progress History](#4-progress-history)
