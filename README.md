@@ -68,11 +68,15 @@ The most common approach to estimate marine ecosystem health is, not too surpris
 
 To measure the health of the marine ecosystem, 4 indices will be used.
 
-**Tampa Bay Benthic Index** (TBBI): Measures the health of the seafloor ecosystem.
+|Index|Abbr|Organization|Puropse|
+| ------------- | ------------- | ------------- | ------------- |
+|Tampa Bay Benthic Index | TBBI| TBEP| Measures the health of the seafloor ecosystem |
+|Tampa Bay Nekton Index | TBNI | TBEP| Measures the health of the open-water ecosystem |
+|Shannon Diversity Index| SDI | Public Publication|A general measure of species diversity and abundance |
+|Anthropogenic Pressure Index|API|Case Study|Proposed Case Study Index|
+<br>
 
-**Tampa Bay Nekton Index** (TBNI): Measures the health of the open-water ecosystem.
-
-**Shannon Diversity Index** (SDI): A general measure of species diversity and abundance.
+**Shannon Diversity Index**: Well-established indicator index applicable to any given ecosystem. Also used by TBEP for creation of TBBI/TBNI
 
 $$
 H = \sum_{j=1}^{s} p_{i} ln(p_{i})
