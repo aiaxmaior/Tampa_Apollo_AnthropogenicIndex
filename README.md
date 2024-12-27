@@ -61,7 +61,8 @@ The construction of a new dock will inevitably damage local habitats, impacting 
 Changes in the eastern coast of Tampa bay in the past 70 years. circles represent sampling stations used to collect data. Their strategic placement is better understood when looking at the original state of the habitat as opposed to its current, over-developed form.
 <br>
 
-### <ins>Research Review</ins> [](#research-review)
+### <ins>Research Review</ins>
+[ ](#research-review)
 
 The most common approach to estimate marine ecosystem health is, not too surprisingly, to examine past relationships of ecosystem health to which may then be substiated by human driven impacts.
 
