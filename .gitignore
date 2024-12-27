@@ -32,3 +32,4 @@ Thumbs.db
 
 # ignore all directories with the name test
 excluded_files/
+draft work/
