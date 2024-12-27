@@ -1,5 +1,6 @@
 __Author__: Arjun Joshi. <br>
-__Brainstation__. Diploma Course: Data Science. December 2024
+__Brainstation__: Data Science Diploma course<br>
+__December 2024__ <br>
 ![Animated Gif](./img/header_readme.png)
 <br>
 ## Table of Contents
