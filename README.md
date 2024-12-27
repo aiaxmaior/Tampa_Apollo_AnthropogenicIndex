@@ -1,17 +1,7 @@
 __Author__: Arjun Joshi.
 __Brainstation__. Diploma Course: Data Science. December 2024
 ![Animated Gif](./notebooks/images/header_readme.png)
-
-<table border="0">
- <tr>
-    <td><b style="font-size:30px">Table of Contents</b></td>
-    <td><b style="font-size:30px"></b></td>
- </tr>
- <tr>
-    <td>Lorem ipsum ...</td>
-    <td>Lorem ipsum ...</td>
- </tr>
-
+<br>
 ## Table of Contents
 
 [Organization & Documentation](#docs)
@@ -35,8 +25,6 @@ __Brainstation__. Diploma Course: Data Science. December 2024
 - [12. Acknowledgements](#12-acknowledgements)
 - [13. License](#13-license)
 - [Previously recorded changes to the study:](#previously-recorded-changes-to-the-study)
-</table>
-
 #### Navigating the GitHub Repo
 Jupyter Notebooks can be used to follow the order of the study.
 This phase of the research has been consolidated into 3 notebooks and should be revieved in the following order:
