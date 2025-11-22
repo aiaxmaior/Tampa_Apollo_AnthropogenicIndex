@@ -55,15 +55,8 @@ def get_file_size_mb(filepath):
 
 def convert_csv_to_parquet(csv_path, parquet_path, description=""):
     """
-    Convert a single CSV file to Parquet format.
-
-    Args:
-        csv_path: Path to input CSV file
-        parquet_path: Path to output Parquet file
-        description: Description of the data file
-
-    Returns:
-        dict: Conversion statistics
+    Convert a single CSV file to Parquet format with robust error handling.
+    Handles encoding errors and mixed-type columns automatically.
     """
     try:
         print(f"\n{'='*70}")
@@ -71,11 +64,43 @@ def convert_csv_to_parquet(csv_path, parquet_path, description=""):
         if description:
             print(f"Description: {description}")
 
-        # Read CSV
-        print(f"  Reading CSV...", end=" ")
-        df = pd.read_csv(csv_path)
+        # 1. Handle Encoding Issues (Fix for bBioAdj_1.csv)
+        # Try common encodings until one works
+        encodings = ['utf-8', 'latin1', 'cp1252', 'ISO-8859-1']
+        df = None
+        
+        for encoding in encodings:
+            try:
+                print(f"  Reading CSV (trying {encoding})...", end=" ")
+                # low_memory=False helps pandas guess types better on large files
+                df = pd.read_csv(csv_path, encoding=encoding, low_memory=False)
+                print(f"✓ Success")
+                break
+            except UnicodeDecodeError:
+                print(f"✗ Failed")
+                continue
+        
+        if df is None:
+            raise ValueError(f"Could not decode file. Tried: {', '.join(encodings)}")
+
         csv_size = get_file_size_mb(csv_path)
-        print(f"✓ ({len(df):,} rows, {len(df.columns)} columns)")
+        print(f"  Loaded: {len(df):,} rows, {len(df.columns)} columns")
+
+        # 2. Handle Mixed Types (Fix for NIT_FINAL.csv)
+        # PyArrow crashes if an 'object' column contains both strings and ints.
+        # We force all object columns to be strings.
+        print("  Sanitizing data types...", end=" ")
+        
+        # Specific fix for StationID if it exists (known offender)
+        if 'StationID' in df.columns:
+            df['StationID'] = df['StationID'].astype(str)
+
+        # General fix: Ensure all object columns are treated as strings
+        # This prevents "Expected bytes, got int" errors in Parquet
+        for col in df.select_dtypes(include=['object']).columns:
+            df[col] = df[col].astype(str)
+            
+        print("✓")
 
         # Display data info
         print(f"  CSV size: {csv_size:.2f} MB")
@@ -86,7 +111,7 @@ def convert_csv_to_parquet(csv_path, parquet_path, description=""):
         df.to_parquet(
             parquet_path,
             engine='pyarrow',
-            compression='snappy',  # Good balance of speed and compression
+            compression='snappy',
             index=False
         )
         parquet_size = get_file_size_mb(parquet_path)
@@ -116,7 +141,6 @@ def convert_csv_to_parquet(csv_path, parquet_path, description=""):
     except Exception as e:
         print(f"  ✗ Error: {e}")
         return {'file': csv_path.name, 'success': False, 'error': str(e)}
-
 
 def convert_all_csvs():
     """Convert all CSV files in raw_csv directory to Parquet format."""
