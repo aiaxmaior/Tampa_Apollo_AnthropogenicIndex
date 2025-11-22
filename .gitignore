@@ -29,7 +29,10 @@ Thumbs.db
 *.psd
 
 # Large data files
-*.parquet
+# Note: Parquet files are allowed (they're compressed and efficient)
+# Raw CSV files should be kept in data/raw_csv/ (not committed)
+data/raw_csv/*.csv
+data/processed/*.csv
 
 # ignore all directories with the name test
 excluded_files/

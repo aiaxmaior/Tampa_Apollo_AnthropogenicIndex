@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as npim
+import numpy as np
 
 # # # # # # # # # #      Data Dictionary Script      # # # # # # # # # # 
 # Notes:   
